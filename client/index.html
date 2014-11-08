@@ -6,9 +6,23 @@
     <div id='result'></div>
     <label>interim</label>
     <div id='interim'></div>
-    <script src='./js/sound-recog.js'></script>
+
+    <div>
+      <button id='like'>いいね！</button>
+    </div>
+    <div>
+      <button id='hi'>いーれて！</button>
+    </div>
+    <script src='/js/sound-recog.js'></script>
+    <script src='/js/send-interactions.js'></script>
     <script>
      // Initialize
+     var likeButton = document.getElementById('like');
+     var like = new LikeSender(likeButton);
+
+     var hiButton = document.getElementById('hi');
+     var hi = new HiSender(hiButton);
+
      var sound = new HiSoundRecog();
      sound.start();
     </script>
