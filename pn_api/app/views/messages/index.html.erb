@@ -1,0 +1,8 @@
+<h1>Received messages</h1>
+
+<%= render 'message_list', messages: @messages %>
+
+<br>
+
+<%= link_to 'New Message', new_message_path %>
+<%= link_to 'Sent Messages', sent_messages_path %>

@@ -1,0 +1,31 @@
+<h1>Listing pn_jp_words</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Word</th>
+      <th>Kana</th>
+      <th>Pos</th>
+      <th>Value</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pn_jp_words.each do |pn_jp_word| %>
+      <tr>
+        <td><%= pn_jp_word.word %></td>
+        <td><%= pn_jp_word.kana %></td>
+        <td><%= pn_jp_word.pos %></td>
+        <td><%= pn_jp_word.value %></td>
+        <td><%= link_to 'Show', pn_jp_word %></td>
+        <td><%= link_to 'Edit', edit_pn_jp_word_path(pn_jp_word) %></td>
+        <td><%= link_to 'Destroy', pn_jp_word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pn jp word', new_pn_jp_word_path %>

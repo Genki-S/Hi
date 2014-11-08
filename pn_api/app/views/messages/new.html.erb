@@ -1,0 +1,31 @@
+<h1>New message</h1>
+
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :from_uid, value: current_user.uid %>
+
+  <div class="field">
+    <%= f.select(:to_uid, options_from_collection_for_select(User.all, :uid, :name)) %>
+  </div>
+  <div class="field">
+    <%# TODO: Make this :raw_body %>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Send' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', messages_path %>

@@ -1,0 +1,16 @@
+{
+  "name": "hi_server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Genki Sugimoto",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.10.1",
+    "request": "^2.47.0",
+    "socket.io": "^1.2.0"
+  }
+}
