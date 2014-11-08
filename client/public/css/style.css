@@ -1,0 +1,33 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100%;
+}
+
+.main-container {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.button-container {
+    display: table-cell;
+    vartical-align: middle;
+    fload: left;
+    width: 50%;
+    margin: 0px;
+    paddin: 0px;
+}
+
+.button {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: red;
+}
