@@ -7,12 +7,17 @@
   <body>
     <div class='main-container'>
       <div class='button-container'>
-        <button id='like' class='button button-like'>いいね！</button>
+        <button id='like' class='button button-like'>
+          <img src='/image/hiLike.png'>
+          いいね！</button>
       </div>
       <div class='button-container'>
-        <button id='hi' class='button button-hi'>いーれて！</button>
+        <button id='hi' class='button button-hi'>
+          <img src='/image/hi.png'>
+          いーれて！</button>
       </div>
     </div>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/hi-socket.js"></script>
     <script src='/js/send-interactions.js'></script>
