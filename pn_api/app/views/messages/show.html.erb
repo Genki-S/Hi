@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>To uid:</strong>
+  <%= @message.to_uid %>
+</p>
+
+<p>
+  <strong>From uid:</strong>
+  <%= @message.from_uid %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @message.body %>
+</p>
+
+<p>
+  <strong>Raw body:</strong>
+  <%= @message.raw_body %>
+</p>
+
+<p>
+  <strong>Pn value:</strong>
+  <%= @message.pn_value %>
+</p>
+
+<p>
+  <strong>Opened at:</strong>
+  <%= @message.opened_at %>
+</p>
+
+<p>
+  <strong>Sent at:</strong>
+  <%= @message.sent_at %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

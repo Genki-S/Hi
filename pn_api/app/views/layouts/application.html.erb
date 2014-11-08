@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pigeon</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div><%= msg %></div>
+  <% end %>
+<% end %>
+
+<%= render 'layouts/navigation_links' %>
+
+<%= yield %>
+
+</body>
+</html>
