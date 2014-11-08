@@ -17,11 +17,6 @@ app.get('/betao', function(req, res) {
 io.on('connection', function(socket) {
   socket.on('message', function(msg) {
     kinectConnection.sendMessage(msg);
-    console.log(msg);
-    getPnValue(msg, function(pnValue) {
-      // TODO: Send to Kinect
-      console.log("pnValue: " + pnValue);
-    });
   });
 
   socket.on('hi', function() {
@@ -33,8 +28,6 @@ io.on('connection', function(socket) {
 
   socket.on('like', function() {
     kinectConnection.sendLike();
-    // TODO: Send to Kinect
-    console.log("like");
   });
 });
 
