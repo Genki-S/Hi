@@ -42,8 +42,22 @@ body {
   text-align: center;
 }
 
-.button img {
-  display: block;
+.button-icon {
+  width: 50%;
   height: 50%;
   margin: 0 auto;
+}
+
+.button-icon-like {
+  background-image: url("../image/hiLike.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.button-icon-hi {
+  background-image: url("../image/hi.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
