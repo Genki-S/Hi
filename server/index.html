@@ -15,19 +15,26 @@
   </head>
   <body>
     <ul id="messages"></ul>
+    <button id="hi">Hi!</button>
+    <button id="like">Like</button>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-	<script>
-		var socket = io();
-		$('form').submit(function(){
-			console.log('emmit');
-			socket.emit('message', $('#m').val());
-			$('#m').val('');
-			return false;
-		});
-	</script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('form').submit(function(){
+        console.log('emmit');
+        socket.emit('message', $('#m').val());
+        return false;
+      });
+      $('#hi').click(function(){
+        socket.emit('hi');
+      });
+      $('#like').click(function(){
+        socket.emit('like');
+      });
+    </script>
   </body>
 </html>
