@@ -11,8 +11,18 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
   socket.on('message', function(msg) {
     getPnValue(msg, function(pnValue) {
+      // TODO: Send to Kinect
       console.log("pnValue: " + pnValue);
     });
+  });
+
+  socket.on('hi', function() {
+    // Send from Betao to conversation members
+    socket.broadcast.emit('hi');
+  });
+
+  socket.on('like', function() {
+    // TODO: Send to Kinect
   });
 });
 
