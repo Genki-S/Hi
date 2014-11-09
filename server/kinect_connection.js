@@ -69,8 +69,8 @@ function kinectConnectionConstructor() {
     this.accumulatedHSVs.push(h);
     this.accumulateHSVSum += h;
     if (this.accumulatedHSVs.length > HSV_ACCUMULATION_LIMIT) {
-      var pop = this.accumulatedHSVs.pop();
-      this.accumulateHSVSum -= pop;
+      var front = this.accumulatedHSVs.shift();
+      this.accumulateHSVSum -= front;
     }
     console.log(this.accumulatedHSVs);
   }
