@@ -1,7 +1,7 @@
 var dgram = require('dgram');
 var getPnValue = require('./pn_value_en')
 
-var HSV_ACCUMULATION_LIMIT = 20;
+var HSV_ACCUMULATION_LIMIT = 1;
 
 var KINECT_PORT = 55555;
 // var KINECT_HOST = '255.255.255.255';
@@ -17,14 +17,15 @@ module.exports = new kinectConnectionConstructor();
 
 // it's a singleton, so not bothering with prototype.
 function kinectConnectionConstructor() {
+  var self = this;
   this.socket = dgram.createSocket('udp4'),
 
-  this.params = [0, 0, "", ""];
+  this.params = [0, 0, 140, ""];
   this.accumulatedHSVs = [];
   this.accumulateHSVSum = 0;
 
   this.clearParams = function() {
-    this.params = [0, 0, this.params[I_HSV], ""];
+    this.params = [0, 0, this.params[I_HSV], " "];
   };
 
   this.sendParams = function() {
@@ -44,7 +45,7 @@ function kinectConnectionConstructor() {
     this.sendParams();
     // FIXME: Clear LIKE flag, but should not be here
     this.params[I_HI] = 0;
-    this.sendParams();
+    setTimeout(function() { self.sendParams(); }, 2000);
   };
 
   this.sendLike = function() {
@@ -52,7 +53,7 @@ function kinectConnectionConstructor() {
     this.sendParams();
     // FIXME: Clear LIKE flag, but should not be here
     this.params[I_LIKE] = 0;
-    this.sendParams();
+    setTimeout(function() { self.sendParams(); }, 2000);
   },
 
   this.sendMessage = function(msg) {
@@ -66,7 +67,7 @@ function kinectConnectionConstructor() {
 
   // NOTE: using arithmetic average
   this.pnValueToHSV = function(pnValue) {
-    var h = (pnValue * 100) + 140;
+    var h = ((-1 * pnValue) * 100) + 140;
     this.accumulateHSV(h);
     return Math.round(this.accumulateHSVSum / this.accumulatedHSVs.length);
   };
