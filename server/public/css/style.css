@@ -31,7 +31,6 @@ body {
 .button {
   display: block;
   width: 80%;
-  height: 30%;
   border-radius: 10px;
   border: 0px;
   font-weight: bold;
@@ -40,6 +39,14 @@ body {
   margin: 10px auto;
   font-size: 2rem;
   text-align: center;
+}
+
+.button-like {
+  height: 60%;
+}
+
+.button-hi{
+  height: 30%;
 }
 
 .button-icon {
