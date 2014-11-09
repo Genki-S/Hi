@@ -23,7 +23,8 @@ function HiSoundRecog() {
     self.lastRecognizedMessage = "";
 
     self.recognition = new webkitSpeechRecognition();
-    self.recognition.lang = 'ja-JP';
+    self.recognition.lang = 'en-US';
+    // self.recognition.lang = 'ja-JP';
     self.recognition.interimResults = true;
     self.recognition.onstart = self.recognitionOnStartHundler;
     self.recognition.onresult = self.recognitionOnResultHundler;
