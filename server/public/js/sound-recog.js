@@ -1,43 +1,87 @@
+// This speech recognition logic is full of hacks.
+// Problem: webkitSpeechRecognition does not stop recognition while there is
+//          some audio input (so, in conversations it is likely that recognition
+//          does never stop...)
+// Hack:    *delete* webkitSpeechRecognition object when RECOGNITION_TIMEOUT
+//          has passed. And *newly create* webkitSpeechRecognition.
+//          when doing this, the last recognized interim result from old
+//          webkitSpeechRecognition is emit to ensure the best effort.
+var RECOGNITION_TIMEOUT = 5000;
+
 function HiSoundRecog() {
   var self = this;
-  this.recognition = new webkitSpeechRecognition();
-  this.recognition.lang = 'ja-JP';
-  this.recognition_now = false;
+  this.recognition = null;
+  this.lastRecognizedMessage = "";
 
-  this.recognition.onstart = function() {
-    console.log("[Speech Recognition] START");
-  };
+  this.initAndStartRecognition = function() {
+    console.log("[Speech Recognition] initRecognition");
 
-  this.recognition.onresult = function (e) {
-    console.log("[Speech Recognition] RESULT");
-    console.log(e);
-    var result = e.results[e.results.length - 1];
-    if (result.isFinal) {
-      var inputMsg = result[0].transcript.trim();
-      console.log('[emit message] ' + inputMsg);
-      hiSocket.emit("message", inputMsg);
+    console.log(self.lastRecognizedMessage);
+    if (self.lastRecognizedMessage !== "") {
+      self.emitMessage(self.lastRecognizedMessage);
     }
-    // ここのところでWebSocketにばすばす送る
-    document.getElementById('result').innerHTML = result[0].transcript.trim();
-  };
+    self.lastRecognizedMessage = "";
 
-  this.recognition.onend = function() {
-    console.log("[Speech Recognition] END");
+    self.recognition = new webkitSpeechRecognition();
+    self.recognition.lang = 'ja-JP';
+    self.recognition.interimResults = true;
+    self.recognition.onstart = self.recognitionOnStartHundler;
+    self.recognition.onresult = self.recognitionOnResultHundler;
+    self.recognition.onspeechstart = self.recognitionOnSpeechstartHundler;
+    self.recognition.onspeechend = self.recognitionOnSpeechendHundler;
+    self.recognition.onend = self.recognitionOnEndHundler;
+    self.recognition.onerror = self.recognitionOnErrorHundler;
     self.recognition.start();
   };
 
-  this.recognition.onerror = function(e) {
+  this.emitMessage = function(message) {
+    console.log('[emit message] ' + message);
+    hiSocket.emit("message", message);
+    document.getElementById('result').innerHTML = message;
+  };
+
+  this.recognitionOnStartHundler = function() {
+    console.log("[Speech Recognition] START");
+    setTimeout(function() {
+      self.stopAndRestart();
+    }, RECOGNITION_TIMEOUT);
+  };
+
+  this.recognitionOnResultHundler = function (e) {
+    console.log("[Speech Recognition] RESULT");
+    console.log(e);
+    var result = e.results[e.results.length - 1];
+    var inputMsg = result[0].transcript.trim();
+    self.lastRecognizedMessage = inputMsg;
+  };
+
+  this.recognitionOnSpeechstartHundler = function (e) {
+    console.log("[Speech Recognition] SPEECH START");
+  };
+
+  this.recognitionOnSpeechendHundler = function (e) {
+    console.log("[Speech Recognition] SPEECH END");
+  };
+
+  this.recognitionOnEndHundler = function() {
+    console.log("[Speech Recognition] END");
+  };
+
+  this.recognitionOnErrorHundler = function(e) {
     console.log("[Speech Recognition] ERROR");
     console.log(e);
+  };
+
+  this.stopAndRestart = function() {
+    self.recognition.stop();
+    self.initAndStartRecognition();
   };
 };
 
 HiSoundRecog.prototype.start = function() {
-  this.recognition.start();
-  this.recognition_now = true;
+  this.initAndStartRecognition();
 };
 
 HiSoundRecog.prototype.stop = function() {
   this.recognition.stop();
-  this.recognition_now = false;
 };
