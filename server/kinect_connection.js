@@ -62,7 +62,7 @@ function kinectConnectionConstructor() {
   this.pnValueToHSV = function(pnValue) {
     var h = (pnValue * 100) + 140;
     this.accumulateHSV(h);
-    return this.accumulateHSVSum / this.accumulatedHSVs.length;
+    return Math.round(this.accumulateHSVSum / this.accumulatedHSVs.length);
   };
 
   this.accumulateHSV = function(h) {
