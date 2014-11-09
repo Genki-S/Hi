@@ -8,7 +8,7 @@
 
 #ifndef recv_fext_getUDP_h
 #define recv_fext_getUDP_h
-
+#include "textFileforSendHSV.h"
 #include <iostream>
 #include <stdio.h>
 #include <sys/types.h>
@@ -28,7 +28,7 @@ double leap_velocity;
 struct
 {
     int color;//オーラの色
-    wstring message;//受信メッセージ
+    std::string message;//受信メッセージ
     int pushlike;//mark
     int pushjoin;//mark
     
@@ -39,7 +39,7 @@ KinectData kinect_data;
 void LeapThreadInit()
 {
     kinect_data.color=0;
-    kinect_data.message=L"";
+    kinect_data.message="";
     kinect_data.pushlike=0;
     kinect_data.pushjoin=0;
 	std::cout << "Starting External Froce thread...." << std::endl;
@@ -54,7 +54,7 @@ void leap_receive(int testdata)
 		double vel;
 		int sd;
 		struct sockaddr_in addr;
-		char tmp[1024];
+		char tmp[128];
         
 		socklen_t sin_size;
 		struct sockaddr_in from_addr;
@@ -69,7 +69,7 @@ void leap_receive(int testdata)
         
 		// 待ち受けるIPとポート番号を設定
 		addr.sin_family = AF_INET;
-		addr.sin_port = htons(12345);//任意の値
+		addr.sin_port = htons(55555);//任意の値
 		addr.sin_addr.s_addr = INADDR_ANY;//inet_addr("127.0.0.1");//INADDR_ANY; すべてのアドレス宛のパケットを受信する
         
 		// バインドする
@@ -86,16 +86,23 @@ void leap_receive(int testdata)
 		memset(buf, 0, sizeof(buf));
         
 		int len = recv(sd, buf, sizeof(buf), 0);
+        std::cout << "recv:"<<len <<std::endl;
 		if(len>0) {
 			int tmpcolor=0;
             int tmppushlike=0;
             int tmppushjoin=0;
-            wstring tmpmessage=L"テスト";
-			sscanf(buf, "%d %d %d %s", &tmpcolor, &tmppushlike, &tmppushjoin, &tmpmessage);
+            char tmpmessage[128];
+            memset(tmpmessage, 0, sizeof(tmpmessage));
+            printf("%s\n", buf);
+            //like,hi,hsv,message
+			sscanf(buf, "%d,%d,%d,%[^¥n]", &tmppushlike, &tmppushjoin, &tmpcolor, tmpmessage);
             kinect_data.color=tmpcolor;
             kinect_data.message=tmpmessage;
             kinect_data.pushlike=tmppushlike;
             kinect_data.pushjoin=tmppushjoin;
+            
+            creat_textfile(kinect_data.color);
+            //HSV = kinect_data.color;
 		}
 		else {
 		}

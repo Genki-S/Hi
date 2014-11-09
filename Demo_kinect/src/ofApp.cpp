@@ -1,9 +1,5 @@
-#include "ofApp.h"
 #include "getUDP.h"
-
-
-
-
+#include "ofApp.h"
 
 
 //--------------------------------------------------------------
@@ -21,8 +17,8 @@ void ofApp::setup() {
     //joinmark
     joinImage.loadImage("/Users/user/Desktop/joinmark.png");
     
-    //text
-    myFont.loadFont("ヒラギノ角ゴ Pro W6.otf", 64, true, true);
+    //load_font
+    font.loadFont("ヒラギノ角ゴ Pro W6.otf", 40);
     
     //image
     colorImg.allocate(kinect.width, kinect.height);
@@ -45,23 +41,23 @@ void ofApp::setup() {
     //start from the front
     bDrawPointCloud = false;
     
-    //test
-    joinjoin=1;
+    //initialization-いらないかも
     
-    //initialization
-    MovMessage.x=ofGetWidth();
-    MovMessage.y=0;
-    MovImage.x=rand() % ofGetWidth();
-    MovImage.y=ofGetHeight();
-    Movjoin.x=ofGetWidth()/2;
-    Movjoin.y=ofGetHeight()/2;
+    MovImage.x=0;
+    MovImage.y=/*ofGetHeight()/2;*/0;
+    //Movjoin.x=ofGetWidth()/2;
+    //Movjoin.y=ofGetHeight()/2;
+    topic.x=-50;
+    //like = 1;
+    //recv udp
+    LeapThreadInit();
+    //test
+    //kinect_data.message="testtest";
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    
-    //recv udp
-    LeapThreadInit();
     
     ofBackground(200, 200, 200);
     
@@ -100,9 +96,16 @@ void ofApp::update() {
     }
     
     //likemark_Position
-    //MovImage.x = rand() % ofGetWidth();
+    like=kinect_data.pushlike;
+    if(like==1){
+        MovImage.x = rand() % ofGetWidth();
+        MovImage.y=ofGetHeight()/2;
+        //MovImage.y -= 9.0;
+        like=0;
+    }
     MovImage.y -= 9.0;
     
+    joinjoin=kinect_data.pushjoin;
     //joinmark_position_&_size
     if(joinjoin==1){
         Sizejoin.x = 794;
@@ -114,34 +117,39 @@ void ofApp::update() {
     Movjoin.x=ofGetWidth()/2-Sizejoin.x/2;
     Movjoin.y=ofGetHeight()/2-Sizejoin.y/2;
     
-    //MessagePosition
-    MovMessage.x -= 3.0;
-    MovMessage.y =0.0;
+    //text
+    if((kinect_data.message=="")){
+        std::cout << "pass"<<std::endl;
+    }
+    else if(hello.x>-9);
+    else{
+        hello.text = kinect_data.message;
+        hello.x = ofGetWidth();
+        hello.y = rand()%(ofGetHeight()+10);
+        hello.rect = font.getStringBoundingBox(kinect_data.message, 0, 0);
+        kinect_data.message="";
+    }
+    hello.x = hello.x -9;
     
-    
-    
+    if(topic.x<-40){
+        topic.text = "TOPIC : hackathon";
+        topic.x = ofGetWidth();
+        topic.y = 50;
+        topic.rect = font.getStringBoundingBox(kinect_data.message, 0, 0);
+    }
+    topic.x = topic.x -4;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    std::string test = "こ";
-    const char *c = test.c_str();
-    const size_t cSize = strlen(c)+30;
-    std::wstring wc( cSize, L' ' );
-    mbstowcs(&wc[0], c, sizeof(c));
-    //std::cout << &wc.c_str() << std::endl;
-    //std::locale("japanese");
-    myFont.drawStringAsShapes(wc, 100, 100);
-    
-    
     ofSetColor(255, 255, 255);
     
     if(bDrawPointCloud) {
         easyCam.begin();
         easyCam.end();
     } else {
-        // draw from the live kinect
+        //draw_kinect
         kinect.draw(0, 0, ofGetWidth(), ofGetHeight());
         contourFinder.draw(0, 0, ofGetWidth(), ofGetHeight());
         
@@ -173,21 +181,25 @@ void ofApp::draw() {
     */
     ofDrawBitmapString(reportStream.str(), 20, 652);
     
-    like=1;
+    //draw_topic
+    ofSetColor(255, 25, 25);
+    font.drawString(topic.text, topic.x, topic.y);
+    
+    
+    //draw_message
+    ofSetColor(0, 0, 0);
+    font.drawString(hello.text, hello.x, hello.y);
+    
     //draw_likemark
-    if(like==1 && MovImage.y>50){
+    if(MovImage.y>20){
+        ofSetColor(255, 255, 255);
         myImage.draw(MovImage.x, MovImage.y, 200, 200);
-        like = 0;
     }
     
     //draw_joinmark
     if(Sizejoin.x>50){
-    joinImage.draw(Movjoin.x, Movjoin.y, Sizejoin.x, Sizejoin.y);
-    }
-    
-    //message
-    if(messagebox==1){
-        messagebox = 0;
+        ofSetColor(255, 255, 255);
+        joinImage.draw(Movjoin.x, Movjoin.y, Sizejoin.x, Sizejoin.y);
     }
     
 }

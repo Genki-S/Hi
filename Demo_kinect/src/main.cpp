@@ -1,3 +1,4 @@
+//static int HSV=0;
 #include "ofApp.h"
 
 int main() {

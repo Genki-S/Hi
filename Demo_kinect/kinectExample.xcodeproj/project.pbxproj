@@ -19,7 +19,6 @@
 		7ADB04AF67C568EAFAEBA546 /* ofxKinectExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01438542609FC64F1EC60EEB /* ofxKinectExtras.cpp */; };
 		ACE7DC9A3223ED5EE1B80074 /* cameras.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD37876A11E46E4D7069B3 /* cameras.c */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		CEF863D21A0E6A84007B00F4 /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEF863D01A0E6A84007B00F4 /* ofxTrueTypeFontUC.cpp */; };
 		D31F5C1B140C59B2AF1533A8 /* registration.c in Sources */ = {isa = PBXBuildFile; fileRef = 71958293AC5292DE4B7C619D /* registration.c */; };
 		D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A4DD23693DFAB8EC05FAA5D /* ofxCvShortImage.cpp */; };
 		E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A16CBF2E8CFE43AF54FE6F5 /* ofxCvHaarFinder.cpp */; };
@@ -173,12 +172,9 @@
 		CD8565F2F122EECA0C095526 /* types_c.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = types_c.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h; sourceTree = SOURCE_ROOT; };
 		CE81A5E39EB3C871FDF3D4D5 /* ofxOpenCv.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOpenCv.h; path = ../../../addons/ofxOpenCv/src/ofxOpenCv.h; sourceTree = SOURCE_ROOT; };
 		CE9C7160245B19131DAE6128 /* ofxCvColorImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvColorImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvColorImage.cpp; sourceTree = SOURCE_ROOT; };
+		CEBB58671A0F23C200E506DF /* textFileforSendHSV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textFileforSendHSV.h; sourceTree = "<group>"; };
+		CEBB58681A0F2BD100E506DF /* textFileforReadHSV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textFileforReadHSV.h; sourceTree = "<group>"; };
 		CEF863C71A0E471F007B00F4 /* getUDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getUDP.h; sourceTree = "<group>"; };
-		CEF863CC1A0E6A84007B00F4 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
-		CEF863CD1A0E6A84007B00F4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		CEF863CF1A0E6A84007B00F4 /* Meiryo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Meiryo.ttf; sourceTree = "<group>"; };
-		CEF863D01A0E6A84007B00F4 /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
-		CEF863D11A0E6A84007B00F4 /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
 		CF29BFB3FD3CAA54F336E6FD /* cvaux.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = cvaux.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv/cvaux.hpp; sourceTree = SOURCE_ROOT; };
 		CF528C0E8DBFF5C31E8D6529 /* core.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = core.c; path = ../../../addons/ofxKinect/libs/libfreenect/src/core.c; sourceTree = SOURCE_ROOT; };
 		D097EE679E29AD7B5E2CDFCD /* flags.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = flags.h; path = ../../../addons/ofxKinect/libs/libfreenect/src/flags.h; sourceTree = SOURCE_ROOT; };
@@ -523,7 +519,6 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				CEF863CB1A0E6A84007B00F4 /* ofxTrueTypeFontUC */,
 				9683228C705CA3FF4F2EA945 /* ofxKinect */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
 			);
@@ -593,26 +588,6 @@
 			name = src;
 			sourceTree = "<group>";
 		};
-		CEF863CB1A0E6A84007B00F4 /* ofxTrueTypeFontUC */ = {
-			isa = PBXGroup;
-			children = (
-				CEF863CC1A0E6A84007B00F4 /* install.xml */,
-				CEF863CD1A0E6A84007B00F4 /* README */,
-				CEF863CE1A0E6A84007B00F4 /* src */,
-			);
-			path = ofxTrueTypeFontUC;
-			sourceTree = "<group>";
-		};
-		CEF863CE1A0E6A84007B00F4 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CEF863CF1A0E6A84007B00F4 /* Meiryo.ttf */,
-				CEF863D01A0E6A84007B00F4 /* ofxTrueTypeFontUC.cpp */,
-				CEF863D11A0E6A84007B00F4 /* ofxTrueTypeFontUC.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		D0CAFE48EE488EEED9149670 /* objdetect */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +638,8 @@
 			isa = PBXGroup;
 			children = (
 				CEF863C71A0E471F007B00F4 /* getUDP.h */,
+				CEBB58671A0F23C200E506DF /* textFileforSendHSV.h */,
+				CEBB58681A0F2BD100E506DF /* textFileforReadHSV.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
@@ -832,7 +809,6 @@
 				49BEEB2DFA5319D55AA6899F /* tilt.c in Sources */,
 				0F8F016776681D468C0D0949 /* audio.c in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
-				CEF863D21A0E6A84007B00F4 /* ofxTrueTypeFontUC.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,

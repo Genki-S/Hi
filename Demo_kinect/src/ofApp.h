@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"
-#include "ofxTrueTypeFontUC.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -21,21 +20,21 @@ public:
     void mouseReleased(int x, int y, int button);
     void windowResized(int w, int h);
     
-    //いいねマーク
+    //likemark
     ofImage myImage;
     ofVec2f MovImage;//position
     int like = 0;//ON/OFF
     
-    //いーれてボタン
+    //likemark
     ofImage joinImage;
     ofVec2f Movjoin; //position
     ofVec2f Sizejoin; //size
     int joinjoin = 0;
     
-    //受信メッセージ
+    //message
     ofVec2f MovMessage; //position
     int messagebox = 0; //ON/OFF
-    ofxTrueTypeFontUC myFont;
+    //ofxTrueTypeFontUC myFont;
     
     ofxKinect kinect;
     
@@ -45,6 +44,16 @@ public:
     ofxCvGrayscaleImage grayThreshFar; // the far thresholded image
     
     ofxCvContourFinder contourFinder;//輪郭抽出クラス
+    
+    //text
+    ofTrueTypeFont font;
+    struct S{
+        string text;
+        int x, y;
+        ofRectangle rect;
+    };
+    S hello,topic;
+
     
     bool bThreshWithOpenCV;
     bool bDrawPointCloud;
