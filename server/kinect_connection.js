@@ -1,5 +1,5 @@
 var dgram = require('dgram');
-var getPnValue = require('./pn_value')
+var getPnValue = require('./pn_value_en')
 
 var KINECT_PORT = 55555;
 var KINECT_HOST = '255.255.255.255';
@@ -55,7 +55,7 @@ function kinectConnectionConstructor() {
   };
 
   this.pnValueToHSV = function(pnValue) {
-    // TODO: implement
-    return pnValue;
+    var h = (pnValue * 100) + 140;
+    return h;
   };
 }
