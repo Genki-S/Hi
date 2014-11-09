@@ -4,8 +4,8 @@ var getPnValue = require('./pn_value_en')
 var HSV_ACCUMULATION_LIMIT = 20;
 
 var KINECT_PORT = 55555;
-var KINECT_HOST = '255.255.255.255';
-// var KINECT_HOST = '172.17.0.68';
+// var KINECT_HOST = '255.255.255.255';
+var KINECT_HOST = '172.17.0.68';
 
 // likeOn(0 or 1), hi(0 or 1), hsv(string), message
 var I_LIKE = 0;
@@ -42,10 +42,16 @@ function kinectConnectionConstructor() {
   this.sendHi = function() {
     this.params[I_HI] = 1;
     this.sendParams();
+    // FIXME: Clear LIKE flag, but should not be here
+    this.params[I_HI] = 0;
+    this.sendParams();
   };
 
   this.sendLike = function() {
     this.params[I_LIKE] = 1;
+    this.sendParams();
+    // FIXME: Clear LIKE flag, but should not be here
+    this.params[I_LIKE] = 0;
     this.sendParams();
   },
 
