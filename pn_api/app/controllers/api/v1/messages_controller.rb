@@ -23,6 +23,7 @@ class Api::V1::MessagesController < Api::V1::ApplicationController
       end
 
       pn_values = PnJpWord.where(word: prototypes).pluck(:value)
+      pn_values += PnJpWord.where(kana: prototypes).pluck(:value)
       pn_value = if pn_values.size > 0
                    pn_values.sum / pn_values.size.to_f
                  else
