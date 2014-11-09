@@ -6,6 +6,9 @@
 //          has passed. And *newly create* webkitSpeechRecognition.
 //          when doing this, the last recognized interim result from old
 //          webkitSpeechRecognition is emit to ensure the best effort.
+// Notes:
+//   - it should be continuous because if not, recognition does not work after
+//     user stops talking and before initAndStartRecognition fires
 var RECOGNITION_TIMEOUT = 5000;
 
 function HiSoundRecog() {
@@ -25,6 +28,7 @@ function HiSoundRecog() {
     self.recognition = new webkitSpeechRecognition();
     self.recognition.lang = 'en-US';
     // self.recognition.lang = 'ja-JP';
+    self.recognition.continuous = true;
     self.recognition.interimResults = true;
     self.recognition.onstart = self.recognitionOnStartHundler;
     self.recognition.onresult = self.recognitionOnResultHundler;
