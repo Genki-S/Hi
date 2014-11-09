@@ -1,6 +1,8 @@
 var dgram = require('dgram');
 var getPnValue = require('./pn_value_en')
 
+var HSV_ACCUMULATION_LIMIT = 20;
+
 var KINECT_PORT = 55555;
 var KINECT_HOST = '255.255.255.255';
 // var KINECT_HOST = '172.17.0.68';
@@ -18,6 +20,8 @@ function kinectConnectionConstructor() {
   this.socket = dgram.createSocket('udp4'),
 
   this.params = [0, 0, "", ""];
+  this.accumulatedHSVs = [];
+  this.accumulateHSVSum = 0;
 
   this.clearParams = function() {
     this.params = [0, 0, this.params[I_HSV], ""];
@@ -54,8 +58,20 @@ function kinectConnectionConstructor() {
     });
   };
 
+  // NOTE: using arithmetic average
   this.pnValueToHSV = function(pnValue) {
     var h = (pnValue * 100) + 140;
-    return h;
+    this.accumulateHSV(h);
+    return this.accumulateHSVSum / this.accumulatedHSVs.length;
   };
+
+  this.accumulateHSV = function(h) {
+    this.accumulatedHSVs.push(h);
+    this.accumulateHSVSum += h;
+    if (this.accumulatedHSVs.length > HSV_ACCUMULATION_LIMIT) {
+      var pop = this.accumulatedHSVs.pop();
+      this.accumulateHSVSum -= pop;
+    }
+    console.log(this.accumulatedHSVs);
+  }
 }
