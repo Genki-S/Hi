@@ -35,6 +35,11 @@ function kinectConnectionConstructor() {
     this.clearParams();
   }
 
+  this.sendHi = function() {
+    this.params[I_HI] = 1;
+    this.sendParams();
+  };
+
   this.sendLike = function() {
     this.params[I_LIKE] = 1;
     this.sendParams();

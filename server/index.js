@@ -28,9 +28,12 @@ io.on('connection', function(socket) {
 
   socket.on('hi', function() {
     // Send from Betao to conversation members
-    console.log('emit hi.');
-    socket.broadcast.emit('hi');
-    console.log("hi");
+    // console.log('emit hi.');
+    // socket.broadcast.emit('hi');
+    // console.log("hi");
+
+    // Send to kinect for demo purpose
+    kinectConnection.sendHi();
   });
 
   socket.on('like', function() {
